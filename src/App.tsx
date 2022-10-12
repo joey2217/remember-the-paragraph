@@ -1,8 +1,11 @@
 import React, { memo } from 'react'
+import Editor from './Editor'
 
 const App: React.FC = () => {
   return (
-    <>App</>
+    <div className="container">
+      <Editor />
+    </div>
   )
 }
 
