@@ -25,10 +25,11 @@ function Placeholder() {
 }
 
 const editorConfig = {
+  namespace: 'Editor',
   // The editor theme
   theme: ExampleTheme,
   // Handling of errors during update
-  onError(error) {
+  onError(error: any) {
     throw error
   },
   // Any custom nodes go here

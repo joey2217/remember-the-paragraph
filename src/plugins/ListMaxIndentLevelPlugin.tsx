@@ -22,7 +22,7 @@ function getElementNodesInSelection(selection: RangeSelection) {
   }
 
   return new Set(
-    nodesInSelection.map((n: LexicalNode | null | undefined) =>
+    nodesInSelection.map((n: LexicalNode) =>
       $isElementNode(n) ? n : n.getParentOrThrow()
     )
   )
@@ -57,7 +57,11 @@ function isIndentPermitted(maxDepth: number) {
   return totalDepth <= maxDepth
 }
 
-export default function ListMaxIndentLevelPlugin({ maxDepth }) {
+export default function ListMaxIndentLevelPlugin({
+  maxDepth,
+}: {
+  maxDepth: number
+}) {
   const [editor] = useLexicalComposerContext()
 
   useEffect(() => {
