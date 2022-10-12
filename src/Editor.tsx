@@ -15,13 +15,34 @@ import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin'
 import { ListPlugin } from '@lexical/react/LexicalListPlugin'
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin'
 import { TRANSFORMERS } from '@lexical/markdown'
+import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin'
 
 import ListMaxIndentLevelPlugin from './plugins/ListMaxIndentLevelPlugin'
 import CodeHighlightPlugin from './plugins/CodeHighlightPlugin'
 import AutoLinkPlugin from './plugins/AutoLinkPlugin'
+import {
+  $getRoot,
+  EditorState,
+  LexicalEditor,
+  $createTextNode,
+  $createParagraphNode,
+} from 'lexical'
 
 function Placeholder() {
   return <div className="editor-placeholder">Enter some rich text...</div>
+}
+
+function initRichText() {
+  const root = $getRoot()
+  if (root.getFirstChild() === null) {
+    const paragraph = $createParagraphNode()
+    paragraph.append(
+      $createTextNode(
+        '存货应当按照成本进行初始计量。存货成本包括采购成本、加工成本和其他成本。'
+      ).setStyle('color:red')
+    )
+    root.append(paragraph)
+  }
 }
 
 const editorConfig = {
@@ -46,9 +67,20 @@ const editorConfig = {
     AutoLinkNode,
     LinkNode,
   ],
+  editorState: initRichText,
 }
 
 export default function Editor() {
+  function onChange(editorState: EditorState, editor: LexicalEditor) {
+    editorState.read(() => {
+      // Read the contents of the EditorState here.
+      // const root = $getRoot()
+      // const selection = $getSelection()
+      // console.log(root, selection)
+    })
+    console.log(editorState.toJSON())
+  }
+
   return (
     <LexicalComposer initialConfig={editorConfig}>
       <div className="editor-container">
@@ -67,6 +99,7 @@ export default function Editor() {
           <AutoLinkPlugin />
           <ListMaxIndentLevelPlugin maxDepth={7} />
           <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+          <OnChangePlugin onChange={onChange} />
         </div>
       </div>
     </LexicalComposer>

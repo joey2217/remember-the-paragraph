@@ -20,6 +20,7 @@ import {
   $isParentElementRTL,
   $isAtNodeEnd,
   $wrapNodes,
+  $patchStyleText,
 } from '@lexical/selection'
 import { $getNearestNodeOfType, mergeRegister } from '@lexical/utils'
 import {
@@ -456,6 +457,7 @@ export default function ToolbarPlugin() {
   const [isUnderline, setIsUnderline] = useState(false)
   const [isStrikethrough, setIsStrikethrough] = useState(false)
   const [isCode, setIsCode] = useState(false)
+  const [fontColor, setFontColor] = useState<string>('#000')
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection()
@@ -541,7 +543,7 @@ export default function ToolbarPlugin() {
     )
   }, [editor, updateToolbar])
 
-  const codeLanguges = useMemo(() => getCodeLanguages(), [])
+  const codeLanguages = useMemo(() => getCodeLanguages(), [])
   const onCodeLanguageSelect = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
       editor.update(() => {
@@ -563,6 +565,27 @@ export default function ToolbarPlugin() {
       editor.dispatchCommand(TOGGLE_LINK_COMMAND, null)
     }
   }, [editor, isLink])
+
+  const applyStyleText = useCallback(
+    (styles: Record<string, string>) => {
+      editor.update(() => {
+        const selection = $getSelection()
+        if ($isRangeSelection(selection)) {
+          $patchStyleText(selection, styles)
+        }
+      })
+    },
+    [editor]
+  )
+
+  const onFontColorSelect = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const color = e.target.value
+      setFontColor(color)
+      applyStyleText({ color })
+    },
+    [applyStyleText]
+  )
 
   return (
     <div className="toolbar" ref={toolbarRef}>
@@ -624,13 +647,25 @@ export default function ToolbarPlugin() {
           <Select
             className="toolbar-item code-language"
             onChange={onCodeLanguageSelect}
-            options={codeLanguges}
+            options={codeLanguages}
             value={codeLanguage}
           />
           <i className="chevron-down inside" />
         </>
       ) : (
         <>
+          <button
+            className="toolbar-item spaced"
+            style={{ padding: '4px 8px' }}
+            aria-label="Format color"
+          >
+            <input
+              className="color-picker"
+              type="color"
+              value={fontColor}
+              onChange={onFontColorSelect}
+            />
+          </button>
           <button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')
