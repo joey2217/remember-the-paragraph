@@ -607,6 +607,7 @@ export default function ToolbarPlugin({ actions }: ToolbarProps) {
         }}
         className="toolbar-item spaced"
         aria-label="Undo"
+        title="Undo"
       >
         <i className="format undo" />
       </button>
@@ -616,6 +617,7 @@ export default function ToolbarPlugin({ actions }: ToolbarProps) {
           editor.dispatchCommand(REDO_COMMAND, undefined)
         }}
         className="toolbar-item"
+        title="Redo"
         aria-label="Redo"
       >
         <i className="format redo" />
@@ -669,9 +671,10 @@ export default function ToolbarPlugin({ actions }: ToolbarProps) {
             className="toolbar-item spaced"
             style={{ padding: '4px 8px' }}
             aria-label="Format color"
+            title="Text Color"
           >
             <input
-              className="color-picker"
+              className="color-picker cursor-pointer"
               type="color"
               value={fontColor}
               onChange={onFontColorSelect}
@@ -682,6 +685,7 @@ export default function ToolbarPlugin({ actions }: ToolbarProps) {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')
             }}
             className={'toolbar-item spaced ' + (isBold ? 'active' : '')}
+            title="Bold"
             aria-label="Format Bold"
           >
             <i className="format bold" />
@@ -691,6 +695,7 @@ export default function ToolbarPlugin({ actions }: ToolbarProps) {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')
             }}
             className={'toolbar-item spaced ' + (isItalic ? 'active' : '')}
+            title="Italics"
             aria-label="Format Italics"
           >
             <i className="format italic" />
@@ -700,6 +705,7 @@ export default function ToolbarPlugin({ actions }: ToolbarProps) {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')
             }}
             className={'toolbar-item spaced ' + (isUnderline ? 'active' : '')}
+            title="Underline"
             aria-label="Format Underline"
           >
             <i className="format underline" />
@@ -711,6 +717,7 @@ export default function ToolbarPlugin({ actions }: ToolbarProps) {
             className={
               'toolbar-item spaced ' + (isStrikethrough ? 'active' : '')
             }
+            title="Strikethrough"
             aria-label="Format Strikethrough"
           >
             <i className="format strikethrough" />
@@ -720,6 +727,7 @@ export default function ToolbarPlugin({ actions }: ToolbarProps) {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code')
             }}
             className={'toolbar-item spaced ' + (isCode ? 'active' : '')}
+            title="Insert Code"
             aria-label="Insert Code"
           >
             <i className="format code" />
@@ -727,6 +735,7 @@ export default function ToolbarPlugin({ actions }: ToolbarProps) {
           <button
             onClick={insertLink}
             className={'toolbar-item spaced ' + (isLink ? 'active' : '')}
+            title="Insert Link"
             aria-label="Insert Link"
           >
             <i className="format link" />
@@ -739,6 +748,7 @@ export default function ToolbarPlugin({ actions }: ToolbarProps) {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left')
             }}
             className="toolbar-item spaced"
+            title="Left Align"
             aria-label="Left Align"
           >
             <i className="format left-align" />
@@ -748,6 +758,7 @@ export default function ToolbarPlugin({ actions }: ToolbarProps) {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center')
             }}
             className="toolbar-item spaced"
+            title="Center Align"
             aria-label="Center Align"
           >
             <i className="format center-align" />
@@ -757,6 +768,7 @@ export default function ToolbarPlugin({ actions }: ToolbarProps) {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right')
             }}
             className="toolbar-item spaced"
+            title="Right Align"
             aria-label="Right Align"
           >
             <i className="format right-align" />
@@ -766,6 +778,7 @@ export default function ToolbarPlugin({ actions }: ToolbarProps) {
               editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify')
             }}
             className="toolbar-item"
+            title="Justify Align"
             aria-label="Justify Align"
           >
             <i className="format justify-align" />

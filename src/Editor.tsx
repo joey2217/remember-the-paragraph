@@ -6,7 +6,7 @@ import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin'
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin'
 // import TreeViewPlugin from './plugins/TreeViewPlugin'
 import ToolbarPlugin from './plugins/ToolbarPlugin'
-import { HeadingNode, QuoteNode } from '@lexical/rich-text'
+import { $createHeadingNode, HeadingNode, QuoteNode } from '@lexical/rich-text'
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table'
 import { ListItemNode, ListNode } from '@lexical/list'
 import { CodeHighlightNode, CodeNode } from '@lexical/code'
@@ -16,33 +16,28 @@ import { ListPlugin } from '@lexical/react/LexicalListPlugin'
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin'
 import { TRANSFORMERS } from '@lexical/markdown'
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin'
+import { ClearEditorPlugin } from '@lexical/react/LexicalClearEditorPlugin'
 
 import ListMaxIndentLevelPlugin from './plugins/ListMaxIndentLevelPlugin'
 import CodeHighlightPlugin from './plugins/CodeHighlightPlugin'
 import AutoLinkPlugin from './plugins/AutoLinkPlugin'
-import {
-  $getRoot,
-  EditorState,
-  LexicalEditor,
-  $createTextNode,
-  $createParagraphNode,
-} from 'lexical'
+import { $getRoot, EditorState, LexicalEditor, $createTextNode } from 'lexical'
 import ToolbarAction from './ToolbarAction'
 
+const LOCAL_CONTENT = 'local_content'
+
 function Placeholder() {
-  return <div className="editor-placeholder">Enter some rich text...</div>
+  return <div className="editor-placeholder">输入内容...</div>
 }
+
+const localData = localStorage.getItem(LOCAL_CONTENT)
 
 function initRichText() {
   const root = $getRoot()
   if (root.getFirstChild() === null) {
-    const paragraph = $createParagraphNode()
-    paragraph.append(
-      $createTextNode(
-        '存货应当按照成本进行初始计量。存货成本包括采购成本、加工成本和其他成本。'
-      ).setStyle('color:red')
-    )
-    root.append(paragraph)
+    const title = $createHeadingNode('h2')
+    title.append($createTextNode('欢迎使用'))
+    root.append(title)
   }
 }
 
@@ -68,7 +63,7 @@ const editorConfig = {
     AutoLinkNode,
     LinkNode,
   ],
-  editorState: initRichText,
+  editorState: localData ?? initRichText,
 }
 
 export default function Editor() {
@@ -97,6 +92,7 @@ export default function Editor() {
           <CodeHighlightPlugin />
           <ListPlugin />
           <LinkPlugin />
+          <ClearEditorPlugin />
           <AutoLinkPlugin />
           <ListMaxIndentLevelPlugin maxDepth={7} />
           <MarkdownShortcutPlugin transformers={TRANSFORMERS} />

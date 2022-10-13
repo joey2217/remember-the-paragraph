@@ -50,8 +50,7 @@ h1 {
   line-height: 20px;
   font-weight: 400;
   text-align: left;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-radius: 10px;
 }
 
 .editor-inner {
@@ -757,8 +756,20 @@ button.btn {
   @apply px-4 py-1 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-neutral-500 rounded-md hover:bg-neutral-400 focus:outline-none   focus:ring-0 focus:ring-opacity-80;
 }
 
+button.btn i {
+  background-size: contain;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  vertical-align: -0.25em;
+}
+
 button.small {
   @apply px-2 py-1 text-xs;
+}
+button.small i {
+  height: 12px;
+  width: 12px;
 }
 
 button.primary {
@@ -819,9 +830,15 @@ input[type="range"]::-webkit-slider-thumb {
 
 .editor-inner {
   min-height: 50vh;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 #app {
   min-height: 100vh;
   padding: 40px 0 20px 0;
+}
+
+i.clear {
+  background-image: url(/images/icons/trash.svg);
 }

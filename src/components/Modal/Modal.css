@@ -51,9 +51,9 @@
   background-color: #ddd;
 }
 .Modal__content {
-  padding-top: 20px;
+  padding: 10px 0;
 }
 .Modal__footer {
-  border-top: 1px solid #ccc;
+  /* border-top: 1px solid #ccc; */
   padding-top: 12px;
 }

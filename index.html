@@ -28,7 +28,7 @@
     background-repeat: no-repeat;
     background-size: 150px 150px;
   }
-  .bg-rainbow {
+  /* .bg-rainbow {
     width: 150px;
     height: 150px;
     position: fixed;
@@ -37,13 +37,19 @@
     background-image: url("/images/rainbow.svg");
     background-repeat: no-repeat;
     background-size: 150px 150px;
+  } */
+  body{
+    background-image: url("/images/bg.png");
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover;
   }
 </style>
 
 <body>
   <div class="bg-sun"></div>
   <div class="bg-ladybug"></div>
-  <div class="bg-rainbow"></div>
+  <!-- <div class="bg-rainbow"></div> -->
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
