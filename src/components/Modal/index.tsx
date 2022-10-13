@@ -7,11 +7,13 @@ function PortalImpl({
   children,
   title,
   closeOnClickOutside,
+  footer,
 }: {
   children: ReactNode
   closeOnClickOutside: boolean
   onClose: () => void
   title: string
+  footer?: ReactNode
 }) {
   const modalRef = useRef<HTMLDivElement>(null)
 
@@ -24,7 +26,7 @@ function PortalImpl({
   useEffect(() => {
     let modalOverlayElement: HTMLElement | null = null
     const handler = (event: KeyboardEvent) => {
-      if (event.keyCode === 27) {
+      if (event.key === 'Escape') {
         onClose()
       }
     }
@@ -68,6 +70,7 @@ function PortalImpl({
           X
         </button>
         <div className="Modal__content">{children}</div>
+        {footer != null && <div className="Modal__footer">{footer}</div>}
       </div>
     </div>
   )
@@ -78,17 +81,20 @@ export default function Modal({
   children,
   title,
   closeOnClickOutside = true,
+  footer,
 }: {
   children: ReactNode
   closeOnClickOutside?: boolean
   onClose: () => void
   title: string
+  footer?: ReactNode
 }): JSX.Element {
   return createPortal(
     <PortalImpl
       onClose={onClose}
       title={title}
       closeOnClickOutside={closeOnClickOutside}
+      footer={footer}
     >
       {children}
     </PortalImpl>,

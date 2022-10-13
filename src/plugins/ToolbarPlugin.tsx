@@ -1,5 +1,12 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import {
   CAN_REDO_COMMAND,
   CAN_UNDO_COMMAND,
@@ -438,7 +445,11 @@ function BlockOptionsDropdownList({
   )
 }
 
-export default function ToolbarPlugin() {
+interface ToolbarProps {
+  actions?: ReactNode
+}
+
+export default function ToolbarPlugin({ actions }: ToolbarProps) {
   const [editor] = useLexicalComposerContext()
   const toolbarRef = useRef<HTMLDivElement>(null)
   const [canUndo, setCanUndo] = useState(false)
@@ -758,9 +769,10 @@ export default function ToolbarPlugin() {
             aria-label="Justify Align"
           >
             <i className="format justify-align" />
-          </button>{' '}
+          </button>
         </>
       )}
+      {actions != null && <div className="toolbar-actions">{actions}</div>}
     </div>
   )
 }

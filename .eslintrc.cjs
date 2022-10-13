@@ -11,7 +11,7 @@ module.exports = {
     sourceType: 'module',
     project: ['tsconfig.json'],
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['react', 'prettier', 'react-hooks'],
   rules: {
     'prettier/prettier': [
       'error',
@@ -24,5 +24,7 @@ module.exports = {
     'prefer-arrow-callback': 'off',
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+    'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
   },
 }

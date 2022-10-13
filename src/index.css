@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-  @apply bg-[#eee];
+body {
+  @apply bg-[#eee] text-neutral-500;
 }
 
 .other h2 {
@@ -43,7 +43,7 @@ h1 {
 }
 
 .editor-container {
-  margin: 20px auto 20px auto;
+  margin: 0 auto;
   border-radius: 2px;
   color: #000;
   position: relative;
@@ -751,4 +751,77 @@ i.right-align {
 
 i.justify-align {
   background-image: url(/images/icons/justify.svg);
+}
+
+button.btn {
+  @apply px-4 py-1 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-neutral-500 rounded-md hover:bg-neutral-400 focus:outline-none   focus:ring-0 focus:ring-opacity-80;
+}
+
+button.small {
+  @apply px-2 py-1 text-xs;
+}
+
+button.primary {
+  @apply bg-blue-500 hover:bg-blue-400;
+}
+
+input.input {
+  @apply rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-1 px-2 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:border-transparent;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  outline: 0;
+  background-color: transparent;
+  width: 200px;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  background: #eee;
+}
+input[type="range" i]::-webkit-slider-container {
+  height: 20px;
+  overflow: hidden;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #737373;
+  border: 1px solid transparent;
+  margin-top: -8px;
+  border-image: linear-gradient(#737373, #d4d4d4) 0 fill / 8 20 8 0 / 0px 0px 0
+    2000px;
+}
+
+.toolbar-actions {
+  @apply ml-auto flex items-center;
+}
+
+.form-row {
+  @apply flex items-center mx-2 mt-1 mb-2 h-8;
+}
+
+.form-row label {
+  @apply mr-1;
+}
+.form-row label:after {
+  content: "\FF1A";
+}
+
+.modal-footer {
+  @apply flex items-center justify-end;
+}
+
+.editor-inner {
+  min-height: 50vh;
+}
+
+#app {
+  min-height: 100vh;
+  padding: 40px 0 20px 0;
 }

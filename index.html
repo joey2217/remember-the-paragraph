@@ -1,13 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>记住</title>
+</head>
+<style>
+  .bg-sun {
+    width: 150px;
+    height: 150px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-image: url("/images/sun.svg");
+    background-repeat: no-repeat;
+    background-size: 150px 150px;
+  }
+  .bg-ladybug {
+    width: 150px;
+    height: 150px;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    background-image: url("/images/ladybug.svg");
+    background-repeat: no-repeat;
+    background-size: 150px 150px;
+  }
+  .bg-rainbow {
+    width: 150px;
+    height: 150px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-image: url("/images/rainbow.svg");
+    background-repeat: no-repeat;
+    background-size: 150px 150px;
+  }
+</style>
+
+<body>
+  <div class="bg-sun"></div>
+  <div class="bg-ladybug"></div>
+  <div class="bg-rainbow"></div>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

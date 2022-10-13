@@ -30,6 +30,8 @@
   margin: 0px;
   padding-bottom: 10px;
   border-bottom: 1px solid #ccc;
+  font-weight: bold;
+  font-size: 1.5em;
 }
 .Modal__closeButton {
   border: 0px;
@@ -50,4 +52,8 @@
 }
 .Modal__content {
   padding-top: 20px;
+}
+.Modal__footer {
+  border-top: 1px solid #ccc;
+  padding-top: 12px;
 }

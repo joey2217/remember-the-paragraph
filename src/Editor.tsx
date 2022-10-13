@@ -4,7 +4,7 @@ import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin'
 import { ContentEditable } from '@lexical/react/LexicalContentEditable'
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin'
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin'
-import TreeViewPlugin from './plugins/TreeViewPlugin'
+// import TreeViewPlugin from './plugins/TreeViewPlugin'
 import ToolbarPlugin from './plugins/ToolbarPlugin'
 import { HeadingNode, QuoteNode } from '@lexical/rich-text'
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table'
@@ -27,6 +27,7 @@ import {
   $createTextNode,
   $createParagraphNode,
 } from 'lexical'
+import ToolbarAction from './ToolbarAction'
 
 function Placeholder() {
   return <div className="editor-placeholder">Enter some rich text...</div>
@@ -84,14 +85,14 @@ export default function Editor() {
   return (
     <LexicalComposer initialConfig={editorConfig}>
       <div className="editor-container">
-        <ToolbarPlugin />
+        <ToolbarPlugin actions={<ToolbarAction />} />
         <div className="editor-inner">
           <RichTextPlugin
             contentEditable={<ContentEditable className="editor-input" />}
             placeholder={<Placeholder />}
           />
           <HistoryPlugin />
-          <TreeViewPlugin />
+          {/* <TreeViewPlugin /> */}
           <AutoFocusPlugin />
           <CodeHighlightPlugin />
           <ListPlugin />
