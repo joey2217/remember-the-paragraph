@@ -835,7 +835,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #app {
-  min-height: 100vh;
   padding: 40px 0 20px 0;
 }
 

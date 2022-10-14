@@ -6,11 +6,19 @@ import {
   ElementNode,
   CLEAR_EDITOR_COMMAND,
 } from 'lexical'
-import React, { memo, useCallback, useEffect, useState } from 'react'
+import React, {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import Modal from './components/Modal'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import { $createHeadingNode } from '@lexical/rich-text'
+import MessageContext from './contexts/MessageContext'
+import ScoreContext from './contexts/ScoreContext'
 
 dayjs.extend(duration)
 
@@ -76,6 +84,8 @@ const Countdown: React.FC<CountdownProps> = ({ minutes, onTimeout }) => {
 
 const ToolBarAction: React.FC = () => {
   const [editor] = useLexicalComposerContext()
+  const showMessage = useContext(MessageContext)
+  const { setScore } = useContext(ScoreContext)
   const [started, setStarted] = useState(false)
   const [open, setOpen] = useState(false)
   // const [minutes, setMinutes] = useState(10)
@@ -184,11 +194,11 @@ const ToolBarAction: React.FC = () => {
       root.append(paragraph)
       setStarted(false)
       if (allRight) {
-        // TODO
-        console.log('全对')
+        showMessage('恭喜你答对了!')
+        setScore(s => s + 1)
       }
     })
-  }, [answers, editor])
+  }, [answers, editor, setScore, showMessage])
 
   const onConfirm = useCallback(() => {
     editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined)
@@ -209,6 +219,7 @@ const ToolBarAction: React.FC = () => {
 
   const onSave = () => {
     localStorage.setItem(LOCAL_CONTENT, JSON.stringify(editor.getEditorState()))
+    showMessage('暂存成功!')
   }
 
   return (
